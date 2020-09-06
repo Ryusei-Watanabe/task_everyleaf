@@ -33,7 +33,7 @@ class TasksController < ApplicationController
     @task.destroy
      redirect_to tasks_path, notice:"Destroy Task"
   end
-  
+
   private
   def set_task
     params.require(:task).permit(:title,:content)
