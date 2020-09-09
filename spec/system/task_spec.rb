@@ -17,7 +17,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成済みのタスク一覧が表示される' do
         task = FactoryBot.create(:task)
         visit tasks_path
-        expect(page).to have_content 'task1'
+        task_list = all('.article')
+        expect(task_list[1]).to have_content 'task1'
       end
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
