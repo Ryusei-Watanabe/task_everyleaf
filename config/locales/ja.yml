@@ -8,6 +8,10 @@ ja:
     Edit: 編集
     Destroy: 削除
     Back: 戻る
+  tasks:
+    AddTask: タスクを追加しました
+    EditTask: タスクを編集しました
+    DestroyTask: タスクを削除しました
   activerecord:
     models:
       task: タスク
