@@ -21,6 +21,15 @@
 | user_id | integer |
 | task_id | integer |
 
+***
+
+## Gem
+ruby '2.6.5'  
+gem 'rails', '5.2.4'  
+gem 'rspec-rails', '~> 3.8'  
+gem 'capybara', '>= 2.15'
+
+***
 # デプロイ手順
 ### アセットプリコンパイル
 rails assets:precompile RAILS_ENV=production
