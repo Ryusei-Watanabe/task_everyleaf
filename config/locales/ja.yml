@@ -1,8 +1,10 @@
 ---
 ja:
   view:
+    ProhibitedThisTaskFromBeingSaved:: 件のエラーがあります
     TaskList: タスク一覧
     NewTask: 新規投稿
+    Show: 詳細
     Edit: 編集
     Destroy: 削除
     Back: 戻る
