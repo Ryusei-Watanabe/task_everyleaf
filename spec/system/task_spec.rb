@@ -12,25 +12,26 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+  before do
+    FactoryBot.create(:task)
+    FactoryBot.create(:second_task)
+  end
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        task = FactoryBot.create(:task)
         visit tasks_path
         task_list = all('.article')
-        expect(task_list[1]).to have_content 'task1'
+        expect(task_list[1]).to have_content 'test1'
       end
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        # 新規作成
-        task = FactoryBot.create(:second_task)
         # ページ遷移
         visit tasks_path
         # 取得
         task_list = all('.article')
         # check!!
-        expect(task_list[0]).to have_content 'task2'
+        expect(task_list[0]).to have_content 'test2'
       end
     end
   end
@@ -38,8 +39,10 @@ RSpec.describe 'タスク管理機能', type: :system do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
          task = FactoryBot.create(:second_task)
+         # taskのidが必要なので、beforeではダメ!!
          visit task_path(task.id)
-         expect(page).to have_content 'task2'
+         # binding.irb
+         expect(page).to have_content 'test2'
        end
      end
   end
