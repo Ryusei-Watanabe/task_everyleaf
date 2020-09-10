@@ -6,11 +6,14 @@
       <%= link_to task do %>
         <div class="article">
           <div class="title_wrapper">Title: <%= task.title %></div>
+          <div>deadline: <%= task.deadline %></div>
           <div><%= task.created_at %></div>
         </div>
       <% end %>
     </div>
   <% end %>
+  <%= link_to "作成順でソートする", tasks_path(sort_expired: false) %>
+  <%= link_to "終了期限でソートする", tasks_path(sort_expired: true) %>
   <br>
   <%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %>
 </div>
