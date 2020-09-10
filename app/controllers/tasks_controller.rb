@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @task = Task.all
+    @task = Task.all.order(id: "DESC")
   end
   def new
      @task = Task.new
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
       render :new
     else
       if @task.save
-        redirect_to tasks_path, notice: "Add Task"
+        redirect_to tasks_path, notice: t(".AddTask")
       else
         render :new
       end
@@ -24,14 +24,14 @@ class TasksController < ApplicationController
   end
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "Edit Task"
+      redirect_to tasks_path, notice: t(".EditTask")
     else
       render :edit
     end
   end
   def destroy
     @task.destroy
-     redirect_to tasks_path, notice:"Destroy Task"
+     redirect_to tasks_path, notice: t(".DestroyTask")
   end
 
   private
