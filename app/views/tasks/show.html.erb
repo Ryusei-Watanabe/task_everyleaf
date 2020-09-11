@@ -4,6 +4,7 @@
   <p>title:<%= @task.title %></p>
   <p>content: <%= @task.content %></p>
   <p>deadline: <%= @task.deadline %></p>
+  <p>priority: <%= @task.priority %></p>
   <%= link_to t('view.Edit'), edit_task_path(@task) %>
   <%= link_to t('view.Destroy'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
   <%= link_to t('view.Back'), tasks_path %>

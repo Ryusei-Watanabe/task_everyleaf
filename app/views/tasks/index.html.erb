@@ -13,23 +13,23 @@
         <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
       </div>
   </div>
-  <%= link_to "作成順でソートする", tasks_path(sort_expired: false) %>
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: true) %>
-  <br>
+  <%= link_to "直近作成したもの", tasks_path(created_desc: true) %>
+  <%= link_to "終了期限が近い", tasks_path(sort_expired: true) %>
+  <%= link_to "優先順位の高いもの", tasks_path(priority_high: true) %>
+  <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
 <% end %>
-
-
   <% @task.each do |task| %>
     <div class="article_wrapper">
       <%= link_to task do %>
         <div class="article">
           <div class="title_wrapper">Title: <%= task.title %></div>
+          <div>priority: <%= task.priority %></div>
+          <div>state: <%= task.state %></div>
           <div>deadline: <%= task.deadline %></div>
-          <div><%= task.created_at %></div>
+          <div>created_at: <%= task.created_at %></div>
         </div>
       <% end %>
     </div>
   <% end %>
-  <br>
-  <%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %>
+
 </div>

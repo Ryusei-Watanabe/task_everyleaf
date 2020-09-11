@@ -3,12 +3,11 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired] == "true"
       @task = Task.deadline_sort
-    # elsif params[:sort_expired] == "false" あとで使うかな？
+    elsif params[:priority_high] == "true"
+      @task = Task.priority_sort
     else
       @task = Task.created_at_sort
-      # @task = Task.all.order(created_at: :desc)
     end
-    # params[:search].blank?はモデルに書いてあるよ
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:state].present?
         @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort
@@ -18,7 +17,6 @@ class TasksController < ApplicationController
         @task = Task.state_search(params[:task][:state]).created_at_sort
       end
     end
-
   end
       # @search_params = task_search_params 拡張性持たせるなら
     # includesでテーブルをつなげてN+1問題を解決する。
@@ -53,7 +51,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title,:content,:deadline,:state)
+    params.require(:task).permit(:title,:content,:deadline,:state,:priority)
   end
   # def task_search_params
   #   params.fetch(:task, {}).permit(:title, :state)

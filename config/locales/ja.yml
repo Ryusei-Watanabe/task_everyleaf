@@ -1,5 +1,11 @@
 ---
 ja:
+  enums:
+    task:
+      priority:
+        High: 高
+        Medium: 中
+        Low: 低
   view:
     ProhibitedThisTaskFromBeingSaved:: 件のエラーがあります
     TaskList: タスク一覧
