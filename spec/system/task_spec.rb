@@ -5,6 +5,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_task_path
+        select 'Done', from: 'task[state]'
         fill_in 'task_title', with: 'task_rspec'
         fill_in 'task_content', with: 'task_rspec'
         click_on 'commit'
@@ -32,6 +33,27 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.article')
         # check!!
         expect(task_list[0]).to have_content 'test2'
+      end
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        fill_in 'task[title]', with: 'test'
+        click_on 'commit'
+        # タスクの検索欄に検索ワードを入力する (例: task)
+        # 検索ボタンを押す
+        expect(page).to have_content 'test2'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        # ここに実装する
+        # プルダウンを選択する「select」について調べてみること
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        # ここに実装する
       end
     end
   end
