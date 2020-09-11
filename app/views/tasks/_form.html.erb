@@ -10,6 +10,9 @@
     </div>
   <% end %>
   <div class="field">
+    <%= form.select :state,[["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
+  </div>
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>

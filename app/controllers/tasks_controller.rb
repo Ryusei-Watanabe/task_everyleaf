@@ -3,24 +3,25 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired] == "true"
       @task = Task.all.order(deadline: :desc)
-    else
-      @task = Task.all.order(created_at: :desc)
-    end
-  end
 
+    elsif params[:sort_expired] == "false"
+      @task = Task.all.order(created_at: :desc)
+    else
+      @search_params = params[:search][:title]
+      @task = Task.all.search(@search_params)
+    end
+      # @search_params = task_search_params 拡張性持たせるなら
+    # includesでテーブルをつなげてN+1問題を解決する。
+  end
   def new
      @task = Task.new
   end
   def create
     @task = Task.new(task_params)
-    if params[:back]
-      render :new
+    if @task.save
+      redirect_to tasks_path, notice: t(".AddTask")
     else
-      if @task.save
-        redirect_to tasks_path, notice: t(".AddTask")
-      else
-        render :new
-      end
+      render :new
     end
   end
   def show
@@ -46,4 +47,7 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title,:content,:deadline,:state)
   end
+  # def task_search_params 拡張性持たせるなら
+  #   params.fetch(:search, {}).permit(:title)
+  # end
 end
