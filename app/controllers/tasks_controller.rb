@@ -1,22 +1,21 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-
     if params[:sort_expired] == "true"
-      @task = Task.all.order(deadline: :desc)
+      @task = Task.deadline_sort
+    # elsif params[:sort_expired] == "false" あとで使うかな？
     else
-      @task = Task.all.order(created_at: :desc)
+      @task = Task.created_at_sort
+      # @task = Task.all.order(created_at: :desc)
     end
     # params[:search].blank?はモデルに書いてあるよ
     if params[:task].present?
-      # search_params_title
-
       if params[:task][:title].present? && params[:task][:state].present?
-        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state])
+        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort
       elsif params[:task][:title].present?
-        @task = Task.title_search(params[:task][:title])
+        @task = Task.title_search(params[:task][:title]).created_at_sort
       elsif params[:task][:state].present?
-        @task = Task.state_search(params[:task][:state])
+        @task = Task.state_search(params[:task][:state]).created_at_sort
       end
     end
 
