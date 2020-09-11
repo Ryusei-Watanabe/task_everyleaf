@@ -1,18 +1,21 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
+
     if params[:sort_expired] == "true"
       @task = Task.all.order(deadline: :desc)
-
-    elsif params[:sort_expired] == "false"
-      @task = Task.all.order(created_at: :desc)
+    # elsif params[:sort_expired] == "false" あとで使うかな？
     else
+      @task = Task.all.order(created_at: :desc)
+    end
+    # params[:search].blank?はモデルに書いてあるよ
+    if params[:search].present?
       @search_params = params[:search][:title]
       @task = Task.all.search(@search_params)
     end
+  end
       # @search_params = task_search_params 拡張性持たせるなら
     # includesでテーブルをつなげてN+1問題を解決する。
-  end
   def new
      @task = Task.new
   end
@@ -49,5 +52,4 @@ class TasksController < ApplicationController
   end
   # def task_search_params 拡張性持たせるなら
   #   params.fetch(:search, {}).permit(:title)
-  # end
 end
