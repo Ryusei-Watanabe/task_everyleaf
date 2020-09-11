@@ -4,15 +4,22 @@ class TasksController < ApplicationController
 
     if params[:sort_expired] == "true"
       @task = Task.all.order(deadline: :desc)
-    # elsif params[:sort_expired] == "false" あとで使うかな？
     else
       @task = Task.all.order(created_at: :desc)
     end
     # params[:search].blank?はモデルに書いてあるよ
-    if params[:search].present?
-      @search_params = params[:search][:title]
-      @task = Task.all.search(@search_params)
+    if params[:task].present?
+      # search_params_title
+
+      if params[:task][:title].present? && params[:task][:state].present?
+        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state])
+      elsif params[:task][:title].present?
+        @task = Task.title_search(params[:task][:title])
+      elsif params[:task][:state].present?
+        @task = Task.state_search(params[:task][:state])
+      end
     end
+
   end
       # @search_params = task_search_params 拡張性持たせるなら
     # includesでテーブルをつなげてN+1問題を解決する。
@@ -42,7 +49,6 @@ class TasksController < ApplicationController
     @task.destroy
      redirect_to tasks_path, notice: t(".DestroyTask")
   end
-
   private
   def set_task
     @task = Task.find(params[:id])
@@ -50,6 +56,7 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title,:content,:deadline,:state)
   end
-  # def task_search_params 拡張性持たせるなら
-  #   params.fetch(:search, {}).permit(:title)
+  # def task_search_params
+  #   params.fetch(:task, {}).permit(:title, :state)
+  # end
 end

@@ -1,12 +1,16 @@
 <div class="wrapper">
   <p id="notice"><%= notice %></p>
   <h1><%= t('view.TaskList') %></h1>
-  <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |form| %>
+  <%= form_with(scope: :task, url: tasks_path, method: :get, local: true) do |form| %>
   <div class="search_form" >
       <div>
         <%= form.label(:title, 'タイトル') %>
         <%= form.text_field :title, value: @search_params %>
         <%= form.submit('search') %>
+      </div>
+      <div>
+        <%= form.label(:state, 'ステータス') %>
+        <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
       </div>
   </div>
   <%= link_to "作成順でソートする", tasks_path(sort_expired: false) %>
