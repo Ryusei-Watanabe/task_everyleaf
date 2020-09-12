@@ -21,6 +21,12 @@ ja:
     Created_at: 投稿順
     Deadline: 終了期限
     Priority: 優先順位
+    title: タイトル
+    state: ステータス
+    created_at: 投稿時間
+    deadline: 終了期限
+    priority: 優先度
+    content: 内容
     NewTask: 新規投稿
     Show: 詳細
     Edit: 編集
@@ -38,7 +44,8 @@ ja:
         title: タイトル
         content: 内容
         state: 状態
-        deadline: 締め切り
+        deadline: 終了期限
+        priority: 優先度
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

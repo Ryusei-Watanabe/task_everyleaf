@@ -13,6 +13,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         select 'High', from: 'task[priority]'
         fill_in 'task_title', with: 'task_rspec'
         fill_in 'task_content', with: 'task_rspec'
+        fill_in 'task_deadline', with: '9/9/9'
         click_on 'commit'
         expect(page).to have_content 'task_rspec'
       end
@@ -37,7 +38,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "一番上に終了期限が先のタスクが一番上" do
         visit tasks_path
         click_on '終了期限'
-        expect(page).to have_content 'test2'
+        expect(page).to have_content 'test1'
       end
     end
     context '優先順位の高い順にした場合' do

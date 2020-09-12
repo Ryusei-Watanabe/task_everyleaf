@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 <div class="wrapper">
-  <p>state:<%= @task.state %></p>
-  <p>title:<%= @task.title %></p>
-  <p>content: <%= @task.content %></p>
-  <p>deadline: <%= @task.deadline %></p>
-  <p>priority: <%= @task.priority %></p>
+  <p><%= t('view.state') %> : <%= @task.state %></p>
+  <p><%= t('view.title') %> : <%= @task.title %></p>
+  <p><%= t('view.content')%> : <%= @task.content %></p>
+  <p><%= t('view.deadline')%> : <%= @task.deadline %></p>
+  <p><%= t('view.priority') %> : <%= @task.priority %></p>
   <%= link_to t('view.Edit'), edit_task_path(@task) %>
   <%= link_to t('view.Destroy'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
   <%= link_to t('view.Back'), tasks_path %>

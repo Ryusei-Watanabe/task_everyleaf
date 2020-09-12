@@ -23,11 +23,11 @@
     <div class="article_wrapper">
       <%= link_to task do %>
         <div class="article">
-          <div class="title_wrapper">Title: <%= task.title %></div>
-          <div>priority: <%= task.priority %></div>
-          <div>state: <%= task.state %></div>
-          <div>deadline: <%= task.deadline %></div>
-          <div>created_at: <%= task.created_at %></div>
+          <div class="title_wrapper"><%= t('view.title') %> : <%= task.title %></div>
+          <div><%= t('view.priority') %> : <%= task.priority %></div>
+          <div><%= t('view.state') %> : <%= task.state %></div>
+          <div><%= t('view.deadline')%> : <%= task.deadline %></div>
+          <div><%= t('view.created_at') %> : <%= task.created_at %></div>
         </div>
       <% end %>
     </div>

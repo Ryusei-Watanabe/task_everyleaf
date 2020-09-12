@@ -10,18 +10,20 @@
     </div>
   <% end %>
   <div class="field">
-    <%# form.collection_select(:state, Task.all,:id) %>
-    <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
-    <%# form.select :priority, Task.priorities.keys.map {|k, v| [t("task.priorities.#{k}"), v]} %>
-    <%= form.select :priority,["High","Medium","Low"] %>
-  </div>
-  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>
+  </div>
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
+  </div>
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority,["High","Medium","Low"] %>
   </div>
   <div class="field">
     <%= form.label :deadline %>
