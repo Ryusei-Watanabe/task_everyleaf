@@ -13,9 +13,11 @@ RSpec.describe 'タスク管理機能', type: :system do
         select 'High', from: 'task[priority]'
         fill_in 'task_title', with: 'task_rspec'
         fill_in 'task_content', with: 'task_rspec'
-        fill_in 'task_deadline', with: '9/9/9'
+        fill_in 'task_deadline', with: '2020'
         click_on 'commit'
-        expect(page).to have_content 'task_rspec'
+        expect(page).to have_content 'Done'
+        expect(page).to have_content 'High'
+        expect(page).to have_content '2020'
       end
     end
   end
@@ -38,22 +40,22 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "一番上に終了期限が先のタスクが一番上" do
         visit tasks_path
         click_on '終了期限'
-        expect(page).to have_content 'test1'
+        expect(page).to have_content '2020-08-10 09:00:00 +0900'
       end
     end
     context '優先順位の高い順にした場合' do
       it "優先順位が高いタスクを作成順に表示" do
         visit tasks_path
         click_on '優先順位'
-        expect(page).to have_content 'test1'
+        expect(page).to have_content 'High'
       end
     end
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
-        fill_in 'task[title]', with: 'tes'
+        fill_in 'task[title]', with: '2'
         click_on 'commit'
-        expect(page).to have_content 'test2'
+        expect(page).not_to have_content 'test3'
       end
     end
     context 'ステータス検索をした場合' do
@@ -61,7 +63,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # ここに実装する
         visit tasks_path
         select 'Done', from: 'task[state]'
-        expect(page).to have_content 'test2'
+        expect(page).to have_content 'Done'
         # プルダウンを選択する「select」について調べてみること
       end
     end
@@ -72,6 +74,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[title]', with: 'tes'
         select 'Done', from: 'task[state]'
         expect(page).to have_content 'test2'
+        expect(page).to have_content 'Done'
       end
     end
   end
@@ -81,7 +84,6 @@ RSpec.describe 'タスク管理機能', type: :system do
          task = FactoryBot.create(:second_task)
          # taskのidが必要なので、beforeではダメ!!
          visit task_path(task.id)
-         # binding.irb
          expect(page).to have_content 'test2'
        end
      end
