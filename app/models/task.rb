@@ -5,6 +5,6 @@ class Task < ApplicationRecord
   scope :title_search, -> (title) { where('title LIKE(?)',"%#{title}%")}
   scope :state_search, -> (state) { where( state: "#{state}")}
   scope :created_at_sort, -> {all.order( created_at: :desc)}
-  scope :deadline_sort, -> {all.order( deadline: :asc)}
+  scope :deadline_sort, -> {all.order( deadline: :desc)}
   scope :priority_sort, -> {all.order(priority: :asc)}
 end

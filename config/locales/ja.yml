@@ -16,6 +16,11 @@ ja:
   view:
     ProhibitedThisTaskFromBeingSaved:: 件のエラーがあります
     TaskList: タスク一覧
+    Title: タイトル
+    State: ステータス
+    Created_at: 投稿順
+    Deadline: 終了期限
+    Priority: 優先順位
     NewTask: 新規投稿
     Show: 詳細
     Edit: 編集

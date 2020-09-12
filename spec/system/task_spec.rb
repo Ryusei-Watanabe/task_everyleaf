@@ -34,16 +34,16 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
     context '終了期限が降順の場合' do
-      it "一番上に終了期限が古いものが表示される" do
+      it "一番上に終了期限が先のタスクが一番上" do
         visit tasks_path
-        click_on '終了期限が近い'
-        expect(page).to have_content 'test1'
+        click_on '終了期限'
+        expect(page).to have_content 'test2'
       end
     end
     context '優先順位の高い順にした場合' do
-      it "優先順位が高いものを作成順にソート" do
+      it "優先順位が高いタスクを作成順に表示" do
         visit tasks_path
-        click_on '優先順位が高い'
+        click_on '優先順位'
         expect(page).to have_content 'test1'
       end
     end

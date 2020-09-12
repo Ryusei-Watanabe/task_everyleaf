@@ -4,18 +4,18 @@
   <%= form_with(scope: :task, url: tasks_path, method: :get, local: true) do |form| %>
   <div class="search_form" >
       <div>
-        <%= form.label(:title, 'タイトル') %>
+        <%= form.label(:title, t('view.Title')) %>
         <%= form.text_field :title %>
         <%= form.submit('search') %>
       </div>
       <div>
-        <%= form.label(:state, 'ステータス') %>
+        <%= form.label(:state, t('view.State')) %>
         <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
       </div>
   </div>
-  <%= link_to "直近作成したもの", tasks_path(created_desc: true) %>
-  <%= link_to "終了期限が近い", tasks_path(sort_expired: true) %>
-  <%= link_to "優先順位が高い", tasks_path(priority_high: true) %>
+  <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
+  <%= link_to t('view.Deadline'), tasks_path(sort_expired: true) %>
+  <%= link_to t('view.Priority'), tasks_path(priority_high: true) %>
   <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
 <% end %>
 <%= paginate @task %>
