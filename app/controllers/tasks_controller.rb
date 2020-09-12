@@ -2,19 +2,19 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
     if params[:sort_expired] == "true"
-      @task = Task.deadline_sort
+      @task = Task.deadline_sort.page(params[:page]).per(5)
     elsif params[:priority_high] == "true"
-      @task = Task.priority_sort
+      @task = Task.priority_sort.page(params[:page]).per(5)
     else
-      @task = Task.created_at_sort
+      @task = Task.created_at_sort.page(params[:page]).per(5)
     end
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:state].present?
-        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort
+        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
       elsif params[:task][:title].present?
-        @task = Task.title_search(params[:task][:title]).created_at_sort
+        @task = Task.title_search(params[:task][:title]).created_at_sort.page(params[:page]).per(5)
       elsif params[:task][:state].present?
-        @task = Task.state_search(params[:task][:state]).created_at_sort
+        @task = Task.state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
       end
     end
   end
@@ -53,7 +53,4 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title,:content,:deadline,:state,:priority)
   end
-  # def task_search_params
-  #   params.fetch(:task, {}).permit(:title, :state)
-  # end
 end

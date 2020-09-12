@@ -15,7 +15,7 @@
   </div>
   <%= link_to "直近作成したもの", tasks_path(created_desc: true) %>
   <%= link_to "終了期限が近い", tasks_path(sort_expired: true) %>
-  <%= link_to "優先順位の高いもの", tasks_path(priority_high: true) %>
+  <%= link_to "優先順位が高い", tasks_path(priority_high: true) %>
   <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
 <% end %>
   <% @task.each do |task| %>
@@ -31,5 +31,5 @@
       <% end %>
     </div>
   <% end %>
-
+  <%= paginate @task %>
 </div>
