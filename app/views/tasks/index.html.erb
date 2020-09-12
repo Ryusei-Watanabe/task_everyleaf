@@ -18,6 +18,7 @@
   <%= link_to "優先順位が高い", tasks_path(priority_high: true) %>
   <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
 <% end %>
+<%= paginate @task %>
   <% @task.each do |task| %>
     <div class="article_wrapper">
       <%= link_to task do %>
