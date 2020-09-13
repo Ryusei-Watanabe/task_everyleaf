@@ -1,21 +1,34 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @task = Task.all.order(id: "DESC")
+    if params[:sort_expired] == "true"
+      @task = Task.deadline_sort.page(params[:page]).per(5)
+    elsif params[:priority_high] == "true"
+      @task = Task.priority_sort.page(params[:page]).per(5)
+    else
+      @task = Task.created_at_sort.page(params[:page]).per(5)
+    end
+    if params[:task].present?
+      if params[:task][:title].present? && params[:task][:state].present?
+        @task = Task.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
+      elsif params[:task][:title].present?
+        @task = Task.title_search(params[:task][:title]).created_at_sort.page(params[:page]).per(5)
+      elsif params[:task][:state].present?
+        @task = Task.state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
+      end
+    end
   end
+      # @search_params = task_search_params 拡張性持たせるなら
+    # includesでテーブルをつなげてN+1問題を解決する。
   def new
      @task = Task.new
   end
   def create
     @task = Task.new(task_params)
-    if params[:back]
-      render :new
+    if @task.save
+      redirect_to tasks_path, notice: t(".AddTask")
     else
-      if @task.save
-        redirect_to tasks_path, notice: t(".AddTask")
-      else
-        render :new
-      end
+      render :new
     end
   end
   def show
@@ -33,12 +46,11 @@ class TasksController < ApplicationController
     @task.destroy
      redirect_to tasks_path, notice: t(".DestroyTask")
   end
-
   private
   def set_task
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title,:content)
+    params.require(:task).permit(:title,:content,:deadline,:state,:priority)
   end
 end

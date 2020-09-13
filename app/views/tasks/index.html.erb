@@ -1,16 +1,36 @@
 <div class="wrapper">
   <p id="notice"><%= notice %></p>
   <h1><%= t('view.TaskList') %></h1>
+  <%= form_with(scope: :task, url: tasks_path, method: :get, local: true) do |form| %>
+  <div class="search_form" >
+      <div>
+        <%= form.label(:title, t('view.Title')) %>
+        <%= form.text_field :title %>
+        <%= form.submit('search') %>
+      </div>
+      <div>
+        <%= form.label(:state, t('view.State')) %>
+        <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
+      </div>
+  </div>
+  <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
+  <%= link_to t('view.Deadline'), tasks_path(sort_expired: true) %>
+  <%= link_to t('view.Priority'), tasks_path(priority_high: true) %>
+  <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
+<% end %>
+<%= paginate @task %>
   <% @task.each do |task| %>
     <div class="article_wrapper">
       <%= link_to task do %>
         <div class="article">
-          <div class="title_wrapper">Title: <%= task.title %></div>
-          <div><%= task.created_at %></div>
+          <div class="title_wrapper"><%= t('view.title') %> : <%= task.title %></div>
+          <div class="priority_wrapper"><%= t('view.priority') %> : <%= task.priority %></div>
+          <div class="state_wrapper"><%= t('view.state') %> : <%= task.state %></div>
+          <div class="deadline_wrapper"><%= t('view.deadline')%> : <%= task.deadline %></div>
+          <div class="created_at_wrapper"><%= t('view.created_at') %> : <%= task.created_at %></div>
         </div>
       <% end %>
     </div>
   <% end %>
-  <br>
-  <%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %>
+  <%= paginate @task %>
 </div>
