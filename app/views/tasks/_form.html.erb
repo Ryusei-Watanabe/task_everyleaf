@@ -27,7 +27,8 @@
   </div>
   <div class="field">
     <%= form.label :deadline %>
-    <%= form.text_field :deadline %>
+    <%# form.datetime_field :deadline %>
+    <%= form.datetime_select :deadline %>
   </div>
   <div class="actions">
     <%= form.submit %>

@@ -11,13 +11,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         select 'Done', from: 'task[state]'
         select 'High', from: 'task[priority]'
+        select '2019', from: 'task[deadline(1i)]'
         fill_in 'task_title', with: 'task_rspec'
         fill_in 'task_content', with: 'task_rspec'
-        fill_in 'task_deadline', with: '2020'
         click_on 'commit'
         expect(page).to have_content 'Done'
         expect(page).to have_content 'High'
-        expect(page).to have_content '2020'
+        expect(page).to have_content '2019'
       end
     end
   end
@@ -37,10 +37,10 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
     context '終了期限が降順の場合' do
-      it "一番上に終了期限が先のタスクが一番上" do
+      it "一番上に終了期限が遅いタスクが一番上に表示される" do
         visit tasks_path
         click_on '終了期限'
-        expect(page).to have_content '2020-08-10 09:00:00 +0900'
+        expect(page).to have_content '2020-09-20'
       end
     end
     context '優先順位の高い順にした場合' do
