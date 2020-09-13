@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_user, only: [:edit, :destroy]
+  before_action :check_user, only: [:edit, :destroy, :show]
   before_action :logged_user,only: [:new]
   def new
   @user = User.new
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
   def check_user
     if @user.id != current_user.id
-      redirect_to user_path
+      redirect_to tasks_path
     end
   end
 end

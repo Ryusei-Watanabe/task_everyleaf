@@ -7,7 +7,7 @@ def logged_in?
 end
 def logged_user
   if logged_in? == true
-    redirect_to posts_path
+    redirect_to tasks_path
   end
 end
 end

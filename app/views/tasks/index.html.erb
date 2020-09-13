@@ -16,7 +16,7 @@
   <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
   <%= link_to t('view.Deadline'), tasks_path(sort_expired: true) %>
   <%= link_to t('view.Priority'), tasks_path(priority_high: true) %>
-  <div class="post_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
+  <div class="task_wrapper"><%= link_to t('view.NewTask'), new_task_path, class:"task-btn" %></div>
 <% end %>
 <%= paginate @task %>
   <% @task.each do |task| %>
