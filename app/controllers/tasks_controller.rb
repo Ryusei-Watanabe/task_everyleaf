@@ -7,17 +7,18 @@ class TasksController < ApplicationController
       @task = current_user.tasks.deadline_sort.page(params[:page]).per(5)
     elsif params[:priority_high] == "true"
       @task = current_user.tasks.priority_sort.page(params[:page]).per(5)
-    else
-      @task = current_user.tasks.created_at_sort.page(params[:page]).per(5)
-    end
-    if params[:task].present?
+    elsif params[:task].present?
       if params[:task][:title].present? && params[:task][:state].present?
         @task = current_user.tasks.title_search(params[:task][:title]).state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
       elsif params[:task][:title].present?
         @task = current_user.tasks.title_search(params[:task][:title]).created_at_sort.page(params[:page]).per(5)
       elsif params[:task][:state].present?
         @task = current_user.tasks.state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
+      else
+        @task = current_user.tasks.created_at_sort.page(params[:page]).per(5)
       end
+    else
+      @task = current_user.tasks.created_at_sort.page(params[:page]).per(5)
     end
   end
       # @search_params = task_search_params 拡張性持たせるなら
@@ -57,6 +58,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title,:content,:deadline,:state,:priority)
   end
   def check_user
+    # userを確認している
     if @task.user != current_user
       redirect_to tasks_path
     end

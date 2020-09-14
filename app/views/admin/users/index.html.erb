@@ -1,0 +1,22 @@
+ユーザの一覧表示、タスクの数を表示
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>順位</th>
+				<th>名前</th>
+			</tr>
+		</thead>
+		<tbody>
+      <% @user.each do |user| %>
+        <tr>
+  				<th><%= user.id %></th>
+  				<td><%= user.name %></td>
+          <td><%= link_to t('view.Show'), user_path(user) %></td>
+          <td><%= link_to t('view.Edit'), edit_user_path(user) %></td>
+          <td><%= link_to t('view.Destroy'), user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+		</tbody>
+	</table>
+</div>

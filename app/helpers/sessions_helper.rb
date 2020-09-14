@@ -10,4 +10,9 @@ def logged_user
     redirect_to tasks_path
   end
 end
+def logged_user_session_new
+  unless current_user.nil?
+    redirect_to tasks_path,notice: "ログイン中です"
+  end
+end
 end
