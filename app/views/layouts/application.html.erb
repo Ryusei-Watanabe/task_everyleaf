@@ -25,19 +25,15 @@
       <ul class="nav navbar-nav">
       <% if logged_in? %>
         <% if current_user.admin %>
-          <li><%= link_to "Admin", admin_users_path %></li>
+          <li><%= link_to t("view.Admin"), admin_users_path %></li>
         <% end %>
-        <li><%= link_to "Profile", user_path(current_user.id) %></li>
-        <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
-        <li><%= link_to "home", tasks_path, id: :home %></li>
+        <li><%= link_to t("view.Profile"), user_path(current_user.id) %></li>
+        <li><%= link_to t("view.Logout"), session_path(current_user.id), method: :delete %></li>
+        <li><%= link_to t("view.Home"), tasks_path, id: :home %></li>
       <% else %>
-      <li><%= link_to "Sign up", new_user_path, id: :signup %></li>
-      <li><%= link_to "Login", new_session_path, id: :login %></li>
+      <li><%= link_to t("view.SignUp"), new_user_path, id: :signup %></li>
+      <li><%= link_to t("view.Login"), new_session_path, id: :login %></li>
       <% end %>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-      </ul>
     </div>
     <!-- バリデーションを表示 -->
     <% flash.each do |key, value| %>

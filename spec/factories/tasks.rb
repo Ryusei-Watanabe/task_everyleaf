@@ -5,6 +5,7 @@ FactoryBot.define do
     deadline {'2020-09-13-18 00:00:00'.to_datetime}
     state { 'Waiting' }
     priority {'High'}
+    user
   end
   factory :second_task, class: Task do
     title { 'test2' }
@@ -12,6 +13,7 @@ FactoryBot.define do
     deadline {'2020-09-20 00:00:00'.to_datetime}
     state { 'Done' }
     priority {'Medium'}
+    user
   end
   factory :third_task, class: Task do
     title { 'test3' }
@@ -19,5 +21,6 @@ FactoryBot.define do
     deadline {'2020-09-11 00:00:00'.to_datetime}
     state { 'Done' }
     priority {'Low'}
+    user
   end
 end

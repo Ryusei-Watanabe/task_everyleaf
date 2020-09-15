@@ -1,9 +1,15 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:task) { FactoryBot.create(:task, user: user) }
+  let!(:second_task) { FactoryBot.create(:second_task, user: user) }
+  let!(:third_task) { FactoryBot.create(:third_task, user: user) }
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-    FactoryBot.create(:third_task)
+    visit new_session_path
+    fill_in 'session[email]', with: 'user@sample.com'
+    fill_in 'session[password]', with: 'aaaaaa'
+    click_on 'commit'
+    visit tasks_path
   end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
@@ -81,7 +87,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
-         task = FactoryBot.create(:second_task)
+         task = FactoryBot.create(:second_task, user: user)
          # taskのidが必要なので、beforeではダメ!!
          visit task_path(task.id)
          expect(page).to have_content 'test2'
