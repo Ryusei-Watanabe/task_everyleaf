@@ -11,14 +11,20 @@
   <% end %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <% if action_name == 'new' || action_name == 'create' %>
   <%= f.label :email %>
   <%= f.email_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  <% elsif action_name == 'edit' || action_name == 'update' %>
+    <%= f.hidden_field :email %>
+    <%= f.hidden_field :password %>
+    <%= f.hidden_field :password_confirmation %>
+  <% end %>
   <%= f.label :admin %>
   <!-- {}では、デフォルトがfalseになる -->
-  <%= f.check_box :admin,{},true,false %>
+  <%= f.check_box :admin,{},'true','false' %>
   <%= f.submit %>
 <% end %>

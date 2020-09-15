@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_user, only: [:edit, :destroy, :show]
   before_action :logged_user,only: [:new]
   before_action :logged_user_session_new, only: [:new, :create]
   def new
@@ -27,8 +26,13 @@ class UsersController < ApplicationController
     end
   end
   def destroy
-    @user.destroy
-    redirect_to root_url, notice: 'Account was successfully destroyed.'
+    if @user.destroy
+      redirect_to  new_user_path, notice: 'successfully destroyed.'
+    else
+      redirect_to tasks_path, notice:'Cant destroy.'
+    end
+    # @user.destroy
+    # redirect_to root_url, notice: 'Account was successfully destroyed.'
   end
   private
   def set_user

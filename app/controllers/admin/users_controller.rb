@@ -1,8 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :logged_user,only: [:new]
+  before_action :user_admin?, only: [:index, :show, :edit]
+
   def index
-    @user = User.all.order("created_at ASC")
+    @user = User.select(:id, :name, :admin).order("id ASC").page(params[:page]).per(10)
   end
   def new
     @user = User.new
@@ -17,6 +19,7 @@ class Admin::UsersController < ApplicationController
     end
   end
   def show
+    @task = @user.tasks.select(:id, :title, :priority, :state, :created_at, :deadline).order("created_at ASC").page(params[:page]).per(5)
   end
   def edit
   end
@@ -28,8 +31,11 @@ class Admin::UsersController < ApplicationController
     end
   end
   def destroy
-    @user.destroy
-    redirect_to root_url, notice: 'Account was successfully destroyed.'
+    if @user.destroy
+      redirect_to admin_users_path, notice: 'successfully destroyed.'
+    else
+      redirect_to admin_users_path, notice:'Cant destroy.'
+    end
   end
   private
   def set_user
