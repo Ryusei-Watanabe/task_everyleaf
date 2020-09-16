@@ -17,7 +17,7 @@ module SessionsHelper
   end
   def user_admin?
     unless current_user.admin?
-      redirect_to root_path, notice: t('.NoAdmin')
+      redirect_to root_path, notice: t('view.NoAdmin')
     end
   end
 end
