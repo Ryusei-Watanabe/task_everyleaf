@@ -2,7 +2,8 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :user_admin?, only: [:index, :show, :edit]
   def index
-    @user = User.select(:id, :name, :admin, :email).order("id ASC").page(params[:page]).per(10)
+    # @user = User.select(:id, :name, :admin, :email).order("id ASC").page(params[:page]).per(10)
+    @user = User.all.includes(:tasks).order("id ASC").page(params[:page]).per(10)
   end
   def new
     @user = User.new
