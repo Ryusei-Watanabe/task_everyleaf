@@ -5,8 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-
 10.times do |n|
   name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
@@ -25,6 +23,9 @@ end
                content: content,
                deadline: '2019'
                )
+end
+10.times do |n|
+  Label.create!([name: "Task#{n + 1}"])
 end
 User.create!(name: "admin01",
              email: "admin01@sample.com",

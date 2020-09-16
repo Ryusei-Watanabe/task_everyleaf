@@ -5,11 +5,14 @@
       <div>
         <%= form.label(:title, t('view.Title')) %>
         <%= form.text_field :title %>
-        <%= form.submit('search') %>
       </div>
       <div>
         <%= form.label(:state, t('view.State')) %>
         <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
+      </div>
+      <div>
+        <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
+        <%= form.submit 'Search', name: nil %>
       </div>
   </div>
   <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
@@ -27,11 +30,11 @@
           <div class="state_wrapper"><%= t('view.state') %> : <%= task.state %></div>
           <div class="deadline_wrapper"><%= t('view.deadline')%> : <%= task.deadline %></div>
           <div class="created_at_wrapper"><%= t('view.created_at') %> : <%= task.created_at %></div>
-          <td>
-      <% task.labels.each do |label| %>
-        <%= label.name %>
-      <% end %>
-    </td>
+          <div>
+            <% task.labels.each do |label| %>
+              <%= label.name %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
