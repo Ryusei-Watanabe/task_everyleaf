@@ -5,6 +5,7 @@
       <div>
         <%= form.label(:title, t('view.Title')) %>
         <%= form.text_field :title %>
+        <%= form.submit('search') %>
       </div>
       <div>
         <%= form.label(:state, t('view.State')) %>
@@ -12,7 +13,7 @@
       </div>
       <div>
         <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
-        <%= form.submit 'Search', name: nil %>
+        <#= form.submit 'Search', name: nil %>
       </div>
   </div>
   <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
@@ -35,7 +36,6 @@
               <%= label.name %>
             <% end %>
           </div>
-        </div>
       <% end %>
     </div>
   <% end %>
