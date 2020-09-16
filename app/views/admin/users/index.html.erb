@@ -9,6 +9,7 @@
 				<th>管理者権限</th>
 				<th>順位</th>
 				<th>名前</th>
+				<th>メールアドレス</th>
 				<th>タスク数</th>
 			</tr>
 		</thead>
@@ -22,6 +23,7 @@
 						<% end %>
   				<th><%= user.id %></th>
   				<td><%= user.name %></td>
+					<td><%= user.email %></td>
 					<td><%= user.tasks.count %></td>
           <td><%= link_to t('view.Show'), admin_user_path(user) %></td>
           <td><%= link_to t('view.Edit'), edit_admin_user_path(user) %></td>
