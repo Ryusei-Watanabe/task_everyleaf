@@ -27,6 +27,11 @@
           <div class="state_wrapper"><%= t('view.state') %> : <%= task.state %></div>
           <div class="deadline_wrapper"><%= t('view.deadline')%> : <%= task.deadline %></div>
           <div class="created_at_wrapper"><%= t('view.created_at') %> : <%= task.created_at %></div>
+          <td>
+      <% task.labels.each do |label| %>
+        <%= label.name %>
+      <% end %>
+    </td>
         </div>
       <% end %>
     </div>

@@ -55,7 +55,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title,:content,:deadline,:state,:priority)
+    params.require(:task).permit(:title,:content,:deadline,:state,:priority, { label_ids: [] })
   end
   def check_user
     # userを確認している
