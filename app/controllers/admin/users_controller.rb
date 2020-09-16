@@ -23,16 +23,16 @@ class Admin::UsersController < ApplicationController
   end
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'user was successfully updated.'
+      redirect_to @user, notice: t(".EditUser")
     else
       render :edit
     end
   end
   def destroy
     if @user.destroy
-      redirect_to admin_users_path, notice: 'successfully destroyed.'
+      redirect_to admin_users_path, notice: t(".DestroyUser")
     else
-      redirect_to admin_users_path, notice:'Cant destroy.'
+      redirect_to admin_users_path, notice: t(".NotDestroyUser")
     end
   end
   private

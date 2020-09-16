@@ -14,6 +14,9 @@ ja:
         Medium: 中
         Low: 低
   view:
+    LogIn: ログイン
+    SignUp: ユーザー登録
+    login_needed: ログインが必要です
     Admin: 管理者
     Profile: プロフィール
     Logout: ログアウト
@@ -21,6 +24,7 @@ ja:
     SignUp: サインアップ
     Login: ログイン
     ProhibitedThisTaskFromBeingSaved:: 件のエラーがあります
+    ProhibitedThisUserFromBeingSaved:: 件のエラーがあります
     TaskList: タスク一覧
     Title: タイトル
     State: ステータス
@@ -38,6 +42,15 @@ ja:
     Edit: 編集
     Destroy: 削除
     Back: 戻る
+  users:
+    EditUser: ユーザ設定を変更しました
+    DestroyUser: ユーザを削除しました
+    NotDestroyUser: ユーザの削除ができません
+  admin:
+    users:
+      EditUser: ユーザ設定を変更しました
+      DestroyUser: ユーザを削除しました
+      NotDestroyUser: ユーザの削除ができません
   tasks:
     AddTask: タスクを追加しました
     EditTask: タスクを編集しました

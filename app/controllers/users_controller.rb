@@ -22,16 +22,16 @@ class UsersController < ApplicationController
   end
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'user was successfully updated.'
+      redirect_to @user, notice: t(".EditUser")
     else
       render :edit
     end
   end
   def destroy
     if @user.destroy
-      redirect_to  new_user_path, notice: 'successfully destroyed.'
+      redirect_to  new_user_path, notice: t(".DestroyUser")
     else
-      redirect_to tasks_path, notice:'Cant destroy.'
+      redirect_to tasks_path, notice: t(".NotDestroyUser")
     end
     # @user.destroy
     # redirect_to root_url, notice: 'Account was successfully destroyed.'
