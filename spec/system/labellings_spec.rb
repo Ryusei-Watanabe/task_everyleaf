@@ -40,14 +40,22 @@ RSpec.describe 'ラベリング機能', type: :system do
   end
   describe '【 検索機能 】' do
     before do
-      task = FactoryBot.create(:task, user: user)
-
     end
     context '【 ラベルのみで検索した場合 】' do
-      it '【 検索したラベルのみ一致するものが表示される 】' do
-        visit edit_task_path(task.id)
+      it '【 検索したラベルと一致するものが表示される 】' do
+        task1 = FactoryBot.create(:task, user: user)
+        visit edit_task_path(task1.id)
         check 'label01'
         click_on 'commit'
+        task2 = FactoryBot.create(:second_task, user: user)
+        visit edit_task_path(task2.id)
+        check 'label02'
+        click_on 'commit'
+        select 'label01', from: 'task[label_id]'
+        click_on 'Search'
+        click_on 'task_wrapper'
+        expect(page).to have_content 'label01'
+        # 2つある内の一つを正しくソートできていれば、task_wrapperで詳細ページに飛んで、ラベルを確認することができる。
       end
     end
   end
