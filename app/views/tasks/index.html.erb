@@ -18,7 +18,7 @@
   <% end %>
 <%= paginate @task %>
   <% @task.each do |task| %>
-    <%= link_to task do %>
+    <%= link_to task , id:"task_wrapper" do %>
       <div class="article_wrapper">
         <div class="article">
           <div class="title_wrapper"><%= t('view.title') %> : <%= task.title %></div>
