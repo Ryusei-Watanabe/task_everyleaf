@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <h1><%= @user.name %>のページ</h1>
+  <p>メールアドレス: <%= @user.email %></p>
+  <% if @user.id == current_user.id %>
+    <%= link_to t('view.Edit'), edit_user_path(@user) %>
+    <%= link_to t('view.Destroy'), @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% else %>
+  <div>お気に入り一覧</div>
+  <% end %>
+  <%= link_to t('view.Back'), tasks_path %>
+</div>

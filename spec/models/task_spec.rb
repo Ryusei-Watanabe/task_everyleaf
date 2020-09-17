@@ -15,17 +15,18 @@ describe 'タスクモデル機能', type: :model do
     end
     context 'タスクのタイトルと詳細に内容が記載されている場合' do
       it 'バリデーションが通る' do
-        task = Task.new(title: '成功テスト', content: '成功テスト')
+        user = FactoryBot.create(:user)
+        task = Task.new(title: '成功テスト', content: '成功テスト', user: user)
         expect(task).to be_valid
       end
     end
   end
   describe '検索機能' do
     # 必要に応じて、テストデータの内容を変更して構わない
-
-    let!(:task) { FactoryBot.create(:task, title: 'task') }
-    let!(:second_task) { FactoryBot.create(:second_task, title: "sample") }
-    let!(:third_task) { FactoryBot.create(:third_task, title: "example") }
+    let!(:user) {FactoryBot.create(:user)}
+    let!(:task) { FactoryBot.create(:task, title: 'task', user: user) }
+    let!(:second_task) { FactoryBot.create(:second_task, title: "sample", user: user) }
+    let!(:third_task) { FactoryBot.create(:third_task, title: "example", user: user) }
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索キーワードを含むタスクが絞り込まれる" do
         # title_seachはscopeで提示したタイトル検索用メソッドである。メソッド名は任意で構わない。

@@ -19,16 +19,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Bootstrap
-      </a>
+      <a class="navbar-brand" href="#">Manyo</a>
     </div>
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="">top</a></li>
-        <li><a href="">menu1</a></li>
-        <li><a href="">menu2</a></li>
-      </ul>
+      <% if logged_in? %>
+        <% if current_user.admin %>
+          <li><%= link_to t("view.Admin"), admin_users_path %></li>
+        <% end %>
+        <li><%= link_to t("view.Profile"), user_path(current_user.id) %></li>
+        <li><%= link_to t("view.Logout"), session_path(current_user.id), method: :delete %></li>
+        <li><%= link_to t("view.Home"), tasks_path, id: :home %></li>
+      <% else %>
+      <li><%= link_to t("view.SignUp"), new_user_path, id: :signup %></li>
+      <li><%= link_to t("view.Login"), new_session_path, id: :login %></li>
+      <% end %>
     </div>
+    <!-- バリデーションを表示 -->
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
   </div>
 </nav>
     <%= yield %>

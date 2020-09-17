@@ -1,0 +1,21 @@
+// Place all the styles related to the admin::users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.pagination_wrapper{
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  letter-spacing: 1rem;
+}
+.btn-wrapper{
+  margin: 0 auto;
+}
+.btn-default{
+  width: 6rem;
+  display: block;
+  margin: 0 auto;
+}
+#user_admin{
+  margin: 0 auto 1rem auto;
+}
