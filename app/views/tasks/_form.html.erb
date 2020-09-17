@@ -30,7 +30,9 @@
     <%= form.datetime_select :deadline %>
   </div>
   <div class="field">
-    <%# form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+    <!-- <dev class = "label_checkbox"> -->
+      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+    <!-- </div> -->
   </div>
   <div class="actions">
     <%= form.submit %>

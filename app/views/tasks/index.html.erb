@@ -12,8 +12,8 @@
         <%= form.select :state,[["Select",""],["Waiting","Waiting"],["Doing","Doing"],["Done","Done"]] %>
       </div>
       <div>
-        <%# form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
-        <%# form.submit 'Search', name: nil %>
+        <%= form.select :label_id, Label.all.collect{|p|[p.name,p.id]}(:name, :id), include_blank: true %>
+        <%= form.submit 'Search' %>
       </div>
   </div>
   <%= link_to t('view.Created_at'), tasks_path(created_desc: true) %>
@@ -23,21 +23,17 @@
 <% end %>
 <%= paginate @task %>
   <% @task.each do |task| %>
-    <div class="article_wrapper">
-      <%= link_to task do %>
+    <%= link_to task do %>
+      <div class="article_wrapper">
         <div class="article">
           <div class="title_wrapper"><%= t('view.title') %> : <%= task.title %></div>
           <div class="priority_wrapper"><%= t('view.priority') %> : <%= task.priority %></div>
           <div class="state_wrapper"><%= t('view.state') %> : <%= task.state %></div>
           <div class="deadline_wrapper"><%= t('view.deadline')%> : <%= task.deadline %></div>
           <div class="created_at_wrapper"><%= t('view.created_at') %> : <%= task.created_at %></div>
-          <div>
-            <% task.labels.each do |label| %>
-              <%= label.name %>
-            <% end %>
-          </div>
-      <% end %>
-    </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
   <%= paginate @task %>
 </div>
