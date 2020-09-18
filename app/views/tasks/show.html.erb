@@ -5,8 +5,12 @@
   <p><%= t('view.content')%> : <%= @task.content %></p>
   <p><%= t('view.deadline')%> : <%= @task.deadline %></p>
   <p><%= t('view.priority') %> : <%= @task.priority %></p>
+  <div><%= t('view.label') %>:
+    <% @task.labels.each do |label| %>
+      <%= label.name %>
+    <% end %>
+  </div>
   <%= link_to t('view.Edit'), edit_task_path(@task) %>
   <%= link_to t('view.Destroy'), @task, method: :delete, data: { confirm: 'Are you sure?' } %>
   <%= link_to t('view.Back'), tasks_path %>
-
 </div>

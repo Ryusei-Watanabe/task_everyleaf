@@ -3,8 +3,6 @@ class TasksController < ApplicationController
   before_action :authenticate_user
   before_action :check_user, only: [:edit, :destroy]
   def index
-    # @tasks = Task.all
-    # @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
     if params[:sort_expired] == "true"
       @task = current_user.tasks.deadline_sort.page(params[:page]).per(5)
     elsif params[:priority_high] == "true"
@@ -16,6 +14,8 @@ class TasksController < ApplicationController
         @task = current_user.tasks.title_search(params[:task][:title]).created_at_sort.page(params[:page]).per(5)
       elsif params[:task][:state].present?
         @task = current_user.tasks.state_search(params[:task][:state]).created_at_sort.page(params[:page]).per(5)
+      elsif params[:task][:label_id].present?
+        @task = current_user.tasks.joins(:labels).where(labels: { id: params[:task][:label_id] }).page(params[:page]).per(5)
       else
         @task = current_user.tasks.created_at_sort.page(params[:page]).per(5)
       end
